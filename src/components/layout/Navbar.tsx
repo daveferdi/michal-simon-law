@@ -23,8 +23,8 @@ export default function Navbar() {
           "fixed top-0 left-0 right-0 z-50",
           "transition-all duration-700 ease-luxury",
           isScrolled
-            ? "bg-brand-navy-900/95 backdrop-blur-sm shadow-soft"
-            : "bg-transparent"
+            ? "bg-brand-navy-900 backdrop-blur-sm shadow-soft"
+            : "bg-brand-navy-900/40 backdrop-blur-[2px]"
         )}
         role="navigation"
         aria-label="ניווט ראשי"
@@ -50,8 +50,8 @@ export default function Navbar() {
                     "group relative text-xs font-light uppercase tracking-[0.2em]",
                     "transition-colors duration-500 ease-luxury",
                     isScrolled
-                      ? "text-terracotta-500/80 hover:text-terracotta-500"
-                      : "text-white/80 hover:text-white"
+                      ? "text-cream-300 hover:text-terracotta-400"
+                      : "text-white hover:text-terracotta-400"
                   )}
                 >
                   {link.label}
@@ -60,7 +60,7 @@ export default function Navbar() {
                       "absolute -bottom-1 left-0 h-[1px] w-full origin-center",
                       "scale-x-0 transition-transform duration-500 ease-luxury",
                       "group-hover:scale-x-100",
-                      isScrolled ? "bg-terracotta-500" : "bg-white"
+                      "bg-terracotta-400"
                     )}
                   />
                 </a>
@@ -77,18 +77,14 @@ export default function Navbar() {
             <span
               className={cn(
                 "block h-[1.5px] w-6 transition-all duration-500 ease-luxury",
-                isScrolled && !isMobileMenuOpen
-                  ? "bg-terracotta-500"
-                  : "bg-white",
+                "bg-white",
                 isMobileMenuOpen && "translate-y-[7.5px] rotate-45 bg-white"
               )}
             />
             <span
               className={cn(
                 "block h-[1.5px] w-6 transition-all duration-500 ease-luxury",
-                isScrolled && !isMobileMenuOpen
-                  ? "bg-terracotta-500"
-                  : "bg-white",
+                "bg-white",
                 isMobileMenuOpen && "-translate-y-[7.5px] -rotate-45 bg-white"
               )}
             />
