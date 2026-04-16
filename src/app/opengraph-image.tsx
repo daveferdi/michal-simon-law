@@ -9,6 +9,8 @@ export default async function Image() {
   return new ImageResponse(
     (
       <div
+        dir="rtl"
+        lang="he"
         style={{
           width: "100%",
           height: "100%",
@@ -18,6 +20,7 @@ export default async function Image() {
           background: "linear-gradient(135deg, #141420 0%, #3A3A52 50%, #1D1D2E 100%)",
           fontFamily: "sans-serif",
           position: "relative",
+          direction: "rtl",
         }}
       >
         {/* Decorative terracotta accent */}
