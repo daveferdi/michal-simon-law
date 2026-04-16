@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  metadataBase: new URL("https://michal-simon-law.vercel.app"),
+  metadataBase: new URL("https://michal-simon-law-ten.vercel.app"),
 };
 
 export default function RootLayout({
