@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  metadataBase: new URL("https://michalsimonlaw.com"),
+  metadataBase: new URL("https://michal-simon-law.vercel.app"),
 };
 
 export default function RootLayout({
@@ -75,6 +75,9 @@ export default function RootLayout({
       className={`${frankRuhlLibre.variable} ${heebo.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+      </head>
       <body className="font-body antialiased">{children}</body>
     </html>
   );

@@ -1,31 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import { useScroll, useMotionValueEvent } from "framer-motion";
+import {
+  motion,
+  useScroll,
+
+  useTransform,
+  useMotionTemplate,
+} from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS } from "@/lib/constants";
 import MobileMenu from "./MobileMenu";
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setIsScrolled(latest > 50);
-  });
+  // Smooth scroll-linked values: opacity 0.3→0.82, blur 2→14px
+  const bgOpacity = useTransform(scrollY, [0, 400], [0.3, 0.82]);
+  const blurVal = useTransform(scrollY, [0, 400], [2, 14]);
+
+  // Build reactive CSS strings from motion values
+  const backgroundColor = useMotionTemplate`rgba(58, 58, 82, ${bgOpacity})`;
+  const backdropFilter = useMotionTemplate`blur(${blurVal}px)`;
 
   return (
     <>
-      <nav
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50",
-          "transition-all duration-700 ease-luxury",
-          isScrolled
-            ? "bg-brand-navy-900 backdrop-blur-sm shadow-soft"
-            : "bg-brand-navy-900/40 backdrop-blur-[2px]"
-        )}
+      <motion.nav
+        className="fixed top-0 left-0 right-0 z-50"
+        style={{
+          backgroundColor,
+          backdropFilter,
+          WebkitBackdropFilter: backdropFilter,
+        }}
         role="navigation"
         aria-label="ניווט ראשי"
       >
@@ -46,23 +54,10 @@ export default function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className={cn(
-                    "group relative text-xs font-light uppercase tracking-[0.2em]",
-                    "transition-colors duration-500 ease-luxury",
-                    isScrolled
-                      ? "text-cream-300 hover:text-terracotta-400"
-                      : "text-white hover:text-terracotta-400"
-                  )}
+                  className="group relative text-xs font-normal uppercase tracking-[0.2em] text-white transition-colors duration-500 ease-luxury hover:text-terracotta-300"
                 >
                   {link.label}
-                  <span
-                    className={cn(
-                      "absolute -bottom-1 left-0 h-[1px] w-full origin-center",
-                      "scale-x-0 transition-transform duration-500 ease-luxury",
-                      "group-hover:scale-x-100",
-                      "bg-terracotta-400"
-                    )}
-                  />
+                  <span className="absolute -bottom-1 left-0 h-[1px] w-full origin-center scale-x-0 bg-terracotta-400 transition-transform duration-500 ease-luxury group-hover:scale-x-100" />
                 </a>
               </li>
             ))}
@@ -76,21 +71,19 @@ export default function Navbar() {
           >
             <span
               className={cn(
-                "block h-[1.5px] w-6 transition-all duration-500 ease-luxury",
-                "bg-white",
-                isMobileMenuOpen && "translate-y-[7.5px] rotate-45 bg-white"
+                "block h-[1.5px] w-6 bg-white transition-all duration-500 ease-luxury",
+                isMobileMenuOpen && "translate-y-[7.5px] rotate-45"
               )}
             />
             <span
               className={cn(
-                "block h-[1.5px] w-6 transition-all duration-500 ease-luxury",
-                "bg-white",
-                isMobileMenuOpen && "-translate-y-[7.5px] -rotate-45 bg-white"
+                "block h-[1.5px] w-6 bg-white transition-all duration-500 ease-luxury",
+                isMobileMenuOpen && "-translate-y-[7.5px] -rotate-45"
               )}
             />
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
       <MobileMenu
         isOpen={isMobileMenuOpen}

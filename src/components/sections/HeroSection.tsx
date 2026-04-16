@@ -58,19 +58,19 @@ export default function HeroSection() {
       {/* Dark gradient overlay */}
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-brand-navy-900/90 via-brand-navy-900/75 to-brand-navy-900/95" />
 
-      {/* Decorative gradient orb */}
+      {/* Decorative gradient orb — desktop only to avoid mobile overflow */}
       <div
-        className="gradient-orb absolute -top-20 end-[10%] z-[2] h-[500px] w-[500px] bg-terracotta-500/15 lg:end-[30%]"
+        className="gradient-orb absolute -top-20 end-[10%] z-[2] hidden h-[500px] w-[500px] bg-terracotta-500/15 md:block lg:end-[30%]"
         style={{ animationDelay: "-5s" }}
       />
       <div
-        className="gradient-orb absolute -bottom-32 start-[5%] z-[2] h-[400px] w-[400px] bg-brand-navy-400/10"
+        className="gradient-orb absolute -bottom-32 start-[5%] z-[2] hidden h-[400px] w-[400px] bg-brand-navy-400/10 md:block"
         style={{ animationDelay: "-10s" }}
       />
 
       {/* Content — Split layout */}
       <div className="relative z-10 flex min-h-screen items-center">
-        <div className="content-wide grid w-full grid-cols-1 items-center gap-10 py-20 lg:grid-cols-2 lg:gap-16">
+        <div className="content-wide grid w-full grid-cols-1 items-center gap-0 py-20 lg:grid-cols-2 lg:gap-16">
           {/* Text side — right in RTL */}
           <div className="order-2 text-center lg:order-1 lg:text-start">
             {/* Label */}
@@ -157,9 +157,9 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Portrait side — left in RTL */}
+          {/* Portrait side — hidden on mobile, visible on desktop */}
           <motion.div
-            className="relative order-1 mx-auto max-w-[280px] lg:order-2 lg:max-w-[340px] xl:max-w-[380px]"
+            className="relative order-1 mx-auto hidden max-w-[340px] lg:order-2 lg:block xl:max-w-[380px]"
             variants={portraitReveal}
             initial="hidden"
             animate="visible"
